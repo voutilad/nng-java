@@ -16,7 +16,7 @@ group 'io.sisu'
 // Yes, it's a bit ugly, but it follows some conventions blessed by
 // Oracle:
 // https://docs.oracle.com/middleware/1212/core/MAVEN/maven_version.htm#MAVEN8904
-version '1.8.0-0-0'
+version '1.8.0-0-1'
 
 repositories {
     mavenCentral()
