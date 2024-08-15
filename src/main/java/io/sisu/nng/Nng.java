@@ -46,11 +46,11 @@ public class Nng {
      */
     private static void checkEnvironmentConfig() {
         final Properties props = System.getProperties();
-        if (!props.contains("jna.debug_load")) {
+        if (!props.containsKey("jna.debug_load")) {
             System.setProperty("jna.debug_load",
                     System.getenv().getOrDefault("JNA_DEBUG_LOAD", ""));
         }
-        if (!props.contains("jna.library.path")) {
+        if (!props.containsKey("jna.library.path")) {
             System.setProperty("jna.library.path",
                     System.getenv().getOrDefault("JNA_LIBRARY_PATH", ""));
         }
