@@ -1,6 +1,7 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
     id 'java'
+    id 'maven-publish'
 }
 
 java {
@@ -19,6 +20,14 @@ version '1.8.0-0-0'
 
 repositories {
     mavenCentral()
+    maven {
+        name = "GithubPackages"
+        url = "https://maven.pkg.github.com/voutilad/nng-java"
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
 }
 
 dependencies {
