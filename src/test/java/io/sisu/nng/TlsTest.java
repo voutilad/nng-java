@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -41,13 +42,18 @@ public class TlsTest {
 
 
     @Test
-    public void simpleTlsSetupTest() throws NngException {
+    public void simpleTlsSetupTest() throws NngException, FileNotFoundException {
         Socket client = new Req0Socket();
         Socket server = new Rep0Socket();
 
         TlsConfig clientConfig = new TlsConfig(TlsConfig.SocketMode.CLIENT);
         clientConfig.setAuthMode(TlsConfig.AuthMode.NONE);
-        // clientConfig.setServerName("localhost");
+        clientConfig.setServerName("localhost");
+        final String ca = TlsTest.class.getResource(certFilename).getPath();
+        if (ca == null) {
+            throw new FileNotFoundException("could not get path to CA certicate");
+        }
+        clientConfig.setCertificateAuthorityFile(ca);
         client.setTlsConfig(clientConfig);
 
         TlsConfig serverConfig = new TlsConfig(TlsConfig.SocketMode.SERVER);
@@ -55,6 +61,7 @@ public class TlsTest {
         server.setTlsConfig(serverConfig);
 
         server.listen("tls+tcp://localhost:9999");
+        //try {Thread.sleep(120 * 1000); } catch (InterruptedException e) {}
         client.dial("tls+tcp://localhost:9999");
 
         Message msg = new Message();

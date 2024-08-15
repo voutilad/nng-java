@@ -301,6 +301,8 @@ public class NngDirectLibrary implements NngLibrary {
     public native String nng_tls_engine_description();
     public native boolean nng_tls_engine_fips_mode();
     public native String nng_tls_engine_name();
+    public native int nng_tls_register();
+
     // XXX: Memtrack...requires patch to NNG that tracks memory allocation
     // public native int nng_memtrack(UInt64ByReference alloc, UInt64ByReference freed);
 }

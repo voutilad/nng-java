@@ -66,6 +66,7 @@ public class TlsConfig {
     }
 
     public TlsConfig(SocketMode mode) throws NngException {
+        Nng.lib().nng_tls_register();
         TlsConfigByReference ref = new TlsConfigByReference();
         int rv = Nng.lib().nng_tls_config_alloc(ref, mode.getValue());
         if (rv != 0) {
@@ -74,6 +75,13 @@ public class TlsConfig {
         }
         this.tls = ref.getTlsConfig();
         this.socketMode = mode;
+    }
+
+    void setCertificateAuthorityFile(String path) throws NngException {
+        int rv = Nng.lib().nng_tls_config_ca_file(this.tls, path);
+        if (rv != 0) {
+            throw new NngException(Nng.lib().nng_strerror(rv));
+        }
     }
 
     void setAuthMode(AuthMode authMode) throws NngException {

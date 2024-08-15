@@ -285,6 +285,7 @@ public interface NngLibrary extends Library {
     String nng_tls_engine_description();
     boolean nng_tls_engine_fips_mode();
     String nng_tls_engine_name();
+    int nng_tls_register();
 
     // XXX Memtrack...requires patch for NNG to track memory allocation
     // int nng_memtrack(UInt64ByReference alloc, UInt64ByReference freed);
