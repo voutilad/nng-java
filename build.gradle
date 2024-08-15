@@ -1,12 +1,15 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
-    id 'java'
+    id 'java-library'
     id 'maven-publish'
+    // id 'signing'
 }
 
 java {
     sourceCompatibility = 11
     targetCompatibility = 11
+    withJavadocJar()
+    withSourcesJar()
 }
 
 group 'io.sisu'
@@ -17,6 +20,14 @@ group 'io.sisu'
 // Oracle:
 // https://docs.oracle.com/middleware/1212/core/MAVEN/maven_version.htm#MAVEN8904
 version '1.8.0-0-SNAPSHOT'
+
+publishing {
+    publications {
+        nngJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
 
 repositories {
     mavenCentral()
@@ -44,6 +55,11 @@ task getVersion {
     System.out.println("${project.version}")
 }
 
+/*
+signing {
+    sign configurations.archives
+}
+*/
 project(':benchmarks') {
     apply plugin: 'com.github.johnrengelman.shadow'
     apply plugin: 'java'
