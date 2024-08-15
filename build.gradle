@@ -4,12 +4,18 @@ plugins {
 }
 
 java {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 11
+    targetCompatibility = 11
 }
 
 group 'io.sisu'
-version '1.8.0-SNAPSHOT'
+// Given the versioning pattern x.x.x-y-z, the plan is x.x.x follows the
+// expected version of nng supported. The y is the major release of this
+// library against that version and z is the patch release of the major.
+// Yes, it's a bit ugly, but it follows some conventions blessed by
+// Oracle:
+// https://docs.oracle.com/middleware/1212/core/MAVEN/maven_version.htm#MAVEN8904
+version '1.8.0-0-0'
 
 repositories {
     mavenCentral()
@@ -33,8 +39,8 @@ project(':benchmarks') {
     apply plugin: 'com.github.johnrengelman.shadow'
     apply plugin: 'java'
     java {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = 11
+        targetCompatibility = 11
     }
     group = 'io.sisu.nng'
     version = parent.version
@@ -59,8 +65,8 @@ project(':demo') {
     apply plugin: 'com.github.johnrengelman.shadow'
     apply plugin: 'java'
     java {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = 11
+        targetCompatibility = 11
     }
     group = 'io.sisu.nng'
     version = parent.version
@@ -79,12 +85,11 @@ project(':demo') {
         }
     }
 
-    /*
     task runDemoAsyncServer(type: JavaExec) {
         group = "Execution"
         description = "Run the Async Server demo"
         classpath = sourceSets.main.runtimeClasspath
-        main = $/io.sisu.nng.demo.async.Server/$
+        mainClass = $/io.sisu.nng.demo.async.Server/$
         environment "JNA_LIBRARY_PATH", System.getenv("JNA_LIBRARY_PATH")
     }
 
@@ -92,8 +97,7 @@ project(':demo') {
         group = "Execution"
         description = "Run the Async Client demo"
         classpath = sourceSets.main.runtimeClasspath
-        main = $/io.sisu.nng.demo.async.Client/$
+        mainClass = $/io.sisu.nng.demo.async.Client/$
         environment "JNA_LIBRARY_PATH", System.getenv("JNA_LIBRARY_PATH")
     }
-    */
 }

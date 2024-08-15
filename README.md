@@ -22,6 +22,11 @@ An idiomatic Java wrapper around [nng](https://nng.nanomsg.org) using
 > a Java application...but we'll see if/when I get there.
 
 ## Current State
+As of _15 Aug 2024_, things have been updated to work with `nng 1.8.0` using
+Java 11. The only thing added (that was previously missing) were calls to
+register the tls service and the ability to set a trusted CA on a client's
+`TlsConfig`.
+
 As of _8 Feb 2021_, the core nng primitives are implemented allowing a Java
 developer to:
 

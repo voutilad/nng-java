@@ -13,8 +13,10 @@ $ ./gradlew demo:shadowJar
 Running a demo should then be as easy as:
 
 ```
-$ java -cp ./demo/libs/demo-${version}-all.jar <demo class> <...args>
+$ java -cp ./demo/build/libs/demo-${version}-all.jar <demo class> <...args>
 ```
+
+> You may need to set your JNA_LIBRARY_PATH to find nng!
 
 Where `${version}` is the current version of the nng-java project.
 
@@ -40,7 +42,7 @@ The demo is simple:
 To start the server, provide a valid nng url to listen on:
 
 ```
-$ java -cp ./demo/libs/demo-${version}-all.jar \
+$ java -cp ./demo/build/libs/demo-${version}-all.jar \
     io.sisu.nng.demo.async.Server \
     tcp://localhost:9999
 ```
@@ -48,7 +50,7 @@ $ java -cp ./demo/libs/demo-${version}-all.jar \
 Then start some clients, providing a "wait time" argument (in milliseconds):
 
 ```
-$ java -cp ./demo/libs/demo-${version}-all.jar \
+$ java -cp ./demo/build/libs/demo-${version}-all.jar \
     io.sisu.nng.demo.async.Client \
     tcp://localhost:9999 100
 ```
@@ -73,7 +75,7 @@ is enabled by adding a numeric sleep argument while the server takes a `-s`
 flag:
 
 ```
-$ java -cp ./demo/libs/demo-${version}-all.jar \
+$ java -cp ./demo/build/libs/demo-${version}-all.jar \
     io.sisu.nng.demo.raw.Raw \
     tcp://localhost:9999 [-s | <sleep time in seconds>]
 ```
@@ -88,7 +90,7 @@ Socket.
 For the server, start via:
 
 ```
-$ java -cp ./demo/libs/demo-${version}-all.jar \
+$ java -cp ./demo/build/libs/demo-${version}-all.jar \
     io.sisu.nng.demo.reqreq.ReqRep server
     tcp://localhost:9999
 ```
@@ -96,7 +98,7 @@ $ java -cp ./demo/libs/demo-${version}-all.jar \
 And the client:
 
 ```
-$ java -cp ./demo/libs/demo-${version}-all.jar \
+$ java -cp ./demo/build/libs/demo-${version}-all.jar \
     io.sisu.nng.demo.reqreq.ReqRep client
     tcp://localhost:9999
 ```
